@@ -31,6 +31,5 @@ deploy:
   file: 'out/*.{exe,zip}'
   on:
     repo: kokkiemouse/wsldl
-    tags: true
     all_branches: true
   skip_cleanup: 'true'
