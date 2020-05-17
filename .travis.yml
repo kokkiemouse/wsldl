@@ -11,24 +11,26 @@ addons:
     - zip
 script:
 - '[ -z "$TRAVIS_TAG" ] || SW_VER=-DSW_VER=L\"$TRAVIS_TAG\"'
-- 'mkdir out zip'
-- 'x86_64-w64-mingw32-gcc -std=c99 --pedantic -Wall -Wno-implicit-function-declaration --static main.c -lshlwapi -o out/Launcher.exe $SW_VER'
-- 'find  ./res/* -maxdepth 1 -type d -printf ''%f\n'' > resl.txt'
-- 'xargs -a resl.txt -I{} x86_64-w64-mingw32-windres res/{}/res.rc -o res/{}.o'
-- 'xargs -a resl.txt -I{} x86_64-w64-mingw32-gcc -std=c99 --pedantic -Wall -Wno-implicit-function-declaration --static main.c -lshlwapi res/{}.o -o zip/{}.exe $SW_VER'
-- 'cd zip'
-- 'zip ../out/icons.zip *'
-- 'cd ..'
+- mkdir out zip
+- x86_64-w64-mingw32-gcc -std=c99 --pedantic -Wall -Wno-implicit-function-declaration
+  --static main.c -lshlwapi -o out/Launcher.exe $SW_VER
+- find  ./res/* -maxdepth 1 -type d -printf '%f\n' > resl.txt
+- xargs -a resl.txt -I{} x86_64-w64-mingw32-windres res/{}/res.rc -o res/{}.o
+- xargs -a resl.txt -I{} x86_64-w64-mingw32-gcc -std=c99 --pedantic -Wall -Wno-implicit-function-declaration
+  --static main.c -lshlwapi res/{}.o -o zip/{}.exe $SW_VER
+- cd zip
+- zip ../out/icons.zip *
+- cd ..
 notifications:
   email: false
-#deploy:
-#  provider: releases
-#  api_key:
-#    secure: Y4vr+lcsGVm8rLNI5Ja/e1GwI+9HBCC+29pfRgXJcVaLaYEULgfZDf/h0PoK+mA7B+ooXbivJQkbtCU1mkYpMQq8RywFpk1sTM+BbrpV8Ro2XgEkELmJZ/okYZMh/YH5xee970uc3WczGAHswg+erP7Cju1JPdYh+0uU7rDZ1OeTTJvV1qECijyOtM5Xaa6yXYYx9lK6EK+Prk9k5l/T6grY0bo5MKvuGx1Y0CC7D6YirVy9qnsm7DqFnCSlaTHQ+Hp/MQ1QnQuB0DERw0K6NANtYoLBYtYUf37UmYgdpkryYpVJByqIvd962cv0/qz0KqDDxDrI4GLcRc1LwJm265IhhoSD3QLLgTfrFQ8KHmXbm7bXTkaeaY3j1qPvBE9MzKWtTuAIsw6y8dnBLCfurhGTDESXNbRmB6RAJfF3OTTxdN6r4lcZnEjNbj5sds1BrgvJ5THvrOlAFbjzlUSxkDaLo7We9CCGPV/LrYi6dp1wAFhwphY7Y8D6qAsGQYB4WdNtSLTDPiRIsDske7oez9S3x9iRkUGzYm8wIUW4ki6x/aWRFq+AFx06uMYFtESzNLCinqj3JiC6dbMEe51rKX1U8Nx3oC2mxI3mmohP5LZYt9HNuu2O3wRwKwkB6yoJsKfU5WlF6DFjeIAuSlZDpeiJlXifOOOUbKAxI/+cRfc=
-#  file_glob: true
-#  file: 'out/*.{exe,zip}'
-#  on:
-#    repo: yuk7/wsldl
-#    tags: true
-#    all_branches: true
-#  skip_cleanup: true
+deploy:
+  provider: releases
+  api_key:
+    secure: E/dyPQx9MfWtzgenKyrBoGS+p1xveRlGCnEID9+9dTxGEVJCSh9UL5jb8xFvAPIPtCU0LVcSOhkCt6FSydQxFmu0CyqJcdbfnKoDaUj7c8TLtisx/mk+gxdt1sSn1aJYyzBQCXLNOPkiONezCBA5lR58PNPXH47n2/ugkgm3Sg63WWqIuZWgefMTkrScK9c13TV9kpnZ/ODzJRY6EKzZ12eCwwsRdAAb/Yc7F020JdughiLBkDqLyZ7glZ2gnoi61lPPgqEXh8oWfjTo6ke6ClzDOKGyMukJ2JwIz9jXSsfNqUfOq8kEIvLnPeamKwU7Np1DAt3oFaNRI8407WBW/6eiC1ysuEA4m9c42WWQ9I7bLNmH6mog6IVPsOE1MERuPDCIAKgm3SeFD+JHZvRW2u+wbQBJOmmsYAcpQjjDjhtRjtdgHDC+V9AgcUM/PmnuuPtABn13bEepp+nZYg2gfmVD7Z9sTS520PLY/vuxx774YwbGF4W41OxlXAa4jPoC4sJ3fpHimdgxJqZTbupW9M9vygl6fw+KHkXjubxQndpw+BHVlmLkPVXdGf8z8ThXlRYHTkz9nrSbqguLhpeuH1vKfEaeEyISz8e7sH22TgcVpo7ubhpvFUPFtResgbnzgLOfaEuPPThLrW2MAPFie4OG7jLjAn5zEEITgXKFN2c=
+  file_glob: true
+  file: 'out/*.{exe,zip}'
+  on:
+    repo: kokkiemouse/wsldl
+    tags: true
+    all_branches: true
+  skip_cleanup: 'true'
