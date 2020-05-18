@@ -488,10 +488,8 @@ int QueryWslPath(wchar_t *TargetName, wchar_t *path, wchar_t *out)
     MultiByteToWideChar(CP_UTF8, 0, buf, -1, out, SHRT_MAX);
     return 0;
 }
-wchar_t* GetUserInput(unsigned long maxCharacters){
-    wchar_t* buf;
-    wscanf(L"%s",buf);
-    return buf;
+void GetUserInput(wchar_t** charkun){
+    wscanf(L"%s",*charkun);
 }
 HRESULT SetDefaultUser(wchar_t *TargetName,wchar_t *userName)
 {
@@ -536,9 +534,10 @@ int InstallDist(wchar_t *TargetName,wchar_t *tgzname)
         return 11;
     }
     wprintf(L"Enter new UNIX username: %0");
-    wchar_t* userName="";
+    wchar_t[32] uname;
+    wchar_t* userName=&uname;
     do{
-        userName = GetUserInput(32);
+        GetUserInput(&userName);
     }while (!CreateUser(TargetName,userName));
     hr = SetDefaultUser(TargetName,userName);
     if (FAILED(hr)) {
