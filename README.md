@@ -1,43 +1,21 @@
 # wsldl
-Advanced WSL Distribution Launcher / Installer
+AlterLinux WSL Distribution Launcher / Installer
 
 
-![screenshot](https://raw.githubusercontent.com/wiki/yuk7/wsldl/img/Arch_Alpine_Cent.png)
+![screenshot](https://raw.githubusercontent.com/wiki/kokkiemouse/AlterWSL/image/Alter.png)
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/yuk7/wsldl/Mingw-w64%20Cross%20CI?logo=GitHub&style=flat-square)](https://github.com/yuk7/wsldl/actions?query=workflow%3A%22Mingw-w64+Cross+CI%22)
-[![AppVeyor](https://img.shields.io/appveyor/ci/yuk7/wsldl.svg?logo=AppVeyor&style=flat-square)](https://ci.appveyor.com/project/yuk7/wsldl)
-[![Github All Releases](https://img.shields.io/github/downloads/yuk7/wsldl/total.svg?style=flat-square)](https://github.com/yuk7/wsldl/releases/latest)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-![License](https://img.shields.io/github/license/yuk7/wsldl.svg?style=flat-square)
+[![Github All Releases](https://img.shields.io/github/downloads/kokkiemouse/wsldl/total.svg?style=flat-square)](https://github.com/kokkiemouse/wsldl/releases/latest)
+![License](https://img.shields.io/github/license/kokkiemouse/wsldl.svg?style=flat-square)
 
 
 
 ## 💻Requirements
-* Windows 10 1709 Fall Creators Update 64bit or later.
+* Windows 10 Insider Preview Build 18971 64bit or later.
 * Windows Subsystem for Linux feature is enabled.
 
 ## 📦Install with Prebuilt Packages
-[Alpine Linux](https://github.com/yuk7/AlpineWSL)
+[Alter Linux](https://github.com/kokkiemouse/AlterWSL)
 
-[Alpine Linux with Git-LFS and Sphinx](https://github.com/binarylandscapes/AlpineWSL) (by [binarylandscapes](https://github.com/binarylandscapes))
-
-[Amazon Linux 2](https://github.com/yosukes-dev/AmazonWSL) (by [yosukes-dev](https://github.com/yosukes-dev))
-
-[Arch Linux](https://github.com/yuk7/ArchWSL)
-
-[Artix Linux](https://github.com/hdk5/ArtixWSL) (by [hdk5](https://github.com/hdk5))
-
-[CentOS](https://github.com/yuk7/CentWSL)
-
-[Clear Linux](https://github.com/wight554/ClearWSL/) (by [wight554](https://github.com/wight554))
-
-[Fedora](https://github.com/yosukes-dev/FedoraWSL) (by [yosukes-dev](https://github.com/yosukes-dev))
-
-[Red hat(UBI)](https://github.com/yosukes-dev/RHWSL) (by [yosukes-dev](https://github.com/yosukes-dev))
-
-[Void Linux (glibc)](https://github.com/am11/VoidWSL) (by [am11](https://github.com/am11))
-
-[Void Linux (musl-libc)](https://github.com/am11/VoidMuslWSL) (by [am11](https://github.com/am11))
 
 **Note:**
 Exe filename is using to the instance name to register.
@@ -45,9 +23,9 @@ If you rename it, you can register with a different name.
 
 
 ## 🔧Install with any rootfs
-#### 1. [Download Launcher.exe](https://github.com/yuk7/wsldl/releases/latest)
+#### 1. [Download Launcher.exe](https://github.com/kokkiemouse/wsldl/releases/latest)
 #### 2. Rename it for distribution name to register.
-(Ex:Rename to Arch.exe if you want to use "Arch" for the Instance name)
+(Ex:Rename to Alter.exe if you want to use "Alter" for the Instance name)
 #### 3. Put your rootfs.tar.gz in same directory as exe (Installation directory)
 #### 4. Run exe to install. This process may take a few minutes.
 
@@ -131,9 +109,9 @@ Usage :
 ```
 
 ## 🛠How-to-Build
-Please see [DEVELOPERS.md](https://github.com/yuk7/wsldl/blob/master/DEVELOPERS.md)
+Please see [DEVELOPERS.md](https://github.com/kokkiemouse/wsldl/blob/master/DEVELOPERS.md)
 
 ## 📄License
-[MIT](https://github.com/yuk7/wsldl/blob/master/LICENSES.md)
+[LGPL](https://github.com/kokkiemouse/wsldl/blob/master/LICENSES.md)
 
-Copyright (c) 2017-2020 yuk7
+Copyright (c) 2017-2020 yuk7 and kokkiemouse

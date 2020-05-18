@@ -1,45 +1,21 @@
-# [wsldl](https://github.com/yuk7/wsldl)
-汎用WSLディストリビューション インストーラ/ランチャー
+# [wsldl](https://github.com/kokkiemouse/wsldl)
+AlterLinux系用WSLディストリビューション インストーラ/ランチャー
 
-![screenshot](https://raw.githubusercontent.com/wiki/yuk7/wsldl/img/Arch_Alpine_Ubuntu.png)
+![screenshot](https://raw.githubusercontent.com/wiki/kokkiemouse/AlterWSL/image/Alter.png)
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/yuk7/wsldl/Mingw-w64%20Cross%20CI?logo=GitHub&style=flat-square)](https://github.com/yuk7/wsldl/actions?query=workflow%3A%22Mingw-w64+Cross+CI%22)
-[![AppVeyor](https://img.shields.io/appveyor/ci/yuk7/wsldl.svg?logo=AppVeyor&style=flat-square)](https://ci.appveyor.com/project/yuk7/wsldl)
-[![Github All Releases](https://img.shields.io/github/downloads/yuk7/wsldl/total.svg?style=flat-square)](https://github.com/yuk7/wsldl/releases/latest)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-![License](https://img.shields.io/github/license/yuk7/wsldl.svg?style=flat-square)
+[![Github All Releases](https://img.shields.io/github/downloads/kokkiemouse/wsldl/total.svg?style=flat-square)](https://github.com/kokkiemouse/wsldl/releases/latest)
+![License](https://img.shields.io/github/license/kokkiemouse/wsldl.svg?style=flat-square)
 
 
 
 ## 💻システム要件
-* Windows 10 1709 Fall Creators Update x64以降
+* Windows 10 Insider Preview Build 18971  64bit以降
 * WSL機能が有効であること
 
 ## 📦既にパッケージされているものをインストール(外部のプロジェクト)
 #### 1. zipをダウンロード
-[Alpine Linux](https://github.com/yuk7/AlpineWSL)
+[Alter Linux](https://github.com/kokkiemouse/AlterWSL)
 
-[Alpine Linux with Git-LFS and Sphinx](https://github.com/binarylandscapes/AlpineWSL) (by [binarylandscapes](https://github.com/binarylandscapes))
-
-[Amazon Linux 2](https://github.com/yosukes-dev/AmazonWSL) (by [yosukes-dev](https://github.com/yosukes-dev))
-
-[Arch Linux](https://github.com/yuk7/ArchWSL)
-
-[Artix Linux](https://github.com/hdk5/ArtixWSL) (by [hdk5](https://github.com/hdk5))
-
-[CentOS](https://github.com/yuk7/CentWSL)
-
-[CentOS](https://github.com/fbigun/WSL-Distro-Rootfs) (by [fbigun](https://github.com/fbigun))
-
-[Clear Linux](https://github.com/wight554/ClearWSL/) (by [wight554](https://github.com/wight554))
-
-[Fedora](https://github.com/yosukes-dev/FedoraWSL) (by [yosukes-dev](https://github.com/yosukes-dev))
-
-[Red hat(UBI)](https://github.com/yosukes-dev/RHWSL) (by [yosukes-dev](https://github.com/yosukes-dev))
-
-[Void Linux (glibc)](https://github.com/am11/VoidWSL) (by [am11](https://github.com/am11))
-
-[Void Linux (musl-libc)](https://github.com/am11/VoidMuslWSL) (by [am11](https://github.com/am11))
 
 #### 2. zip内のファイルをすべて同じ場所に展開
 
@@ -49,9 +25,9 @@ exeのファイル名はインストール名に使用されます。
 
 
 ## 🔧あなたのrootfsでインストール
-#### 1. [Launcher.exeをダウンロード](https://github.com/yuk7/wsldl/releases/latest)
+#### 1. [Launcher.exeをダウンロード](https://github.com/kokkiemouse/wsldl/releases/latest)
 #### 2. Launcher.exeのファイル名を登録するインスタンス名に変更
-(例:Arch.exeにリネームすると「Arch」という名前でインストールされます。
+(例:Alter.exeにリネームすると「Alter」という名前でインストールされます。
 #### 3. あなたが用意したrootfs.tar.gzをexeと同じ場所に配置します。
 #### 4. exeを実行するとインストールされます。
 ※あなたのrootfs.tar.gzとexeをパッケージし、自由に再配布することもできます📦
@@ -137,6 +113,6 @@ Usage :
 ```
 
 ## 📄ライセンス
-[MIT](https://github.com/yuk7/wsldl/blob/master/LICENSES.md)
+[LGPL](https://github.com/kokkiemouse/wsldl/blob/master/LICENSES.md)
 
-Copyright (c) 2017-2020 yuk7
+Copyright (c) 2017-2020 yuk7 and kokkiemouse
