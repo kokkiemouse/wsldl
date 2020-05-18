@@ -534,7 +534,7 @@ int InstallDist(wchar_t *TargetName,wchar_t *tgzname)
         return 11;
     }
     wprintf(L"Enter new UNIX username: %0");
-    wchar_t[32] uname;
+    wchar_t  uname[32];
     wchar_t* userName=&uname;
     do{
         GetUserInput(&userName);
