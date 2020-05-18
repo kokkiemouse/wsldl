@@ -526,6 +526,8 @@ int InstallDist(wchar_t *TargetName,wchar_t *tgzname)
         getchar();
         return hr;
     }
+    
+    wprintf(L"Pacman keyring initializing...\n");
     bool pacres=Pacman_initializing(TargetName);
     if(!pacres){
         fwprintf(stderr,L"ERROR:Installation Failed!\nPacman Initializing Failed");
@@ -533,17 +535,6 @@ int InstallDist(wchar_t *TargetName,wchar_t *tgzname)
         getchar();
         return 11;
     }
-    wprintf(L"Enter new UNIX username: %0");
-    wchar_t  uname[32];
-    wchar_t* userName=&uname;
-    do{
-        GetUserInput(&userName);
-    }while (!CreateUser(TargetName,userName));
-    hr = SetDefaultUser(TargetName,userName);
-    if (FAILED(hr)) {
-        return hr;
-    }
-    
     wprintf(L"Installation Complete!\n");
     wprintf(L"Press any key to continue...");
     getchar();
