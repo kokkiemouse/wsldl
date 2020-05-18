@@ -528,7 +528,7 @@ int InstallDist(wchar_t *TargetName,wchar_t *tgzname,bool create_user)
         getchar();
         return hr;
     }
-    bool pacres=Pacman_initializing();
+    bool pacres=Pacman_initializing(TargetName);
     if(!pacres){
         fwprintf(stderr,L"ERROR:Installation Failed!\nPacman Initializing Failed");
         wprintf(L"Press any key to continue...");
@@ -536,7 +536,7 @@ int InstallDist(wchar_t *TargetName,wchar_t *tgzname,bool create_user)
         return 11;
     }
     if(create_user){
-        wprintf(L("Enter new UNIX username: %0"))
+        wprintf(L"Enter new UNIX username: %0")
         wchar_t* userName;
         do{
             userName = GetUserInput(32);
@@ -574,17 +574,17 @@ HRESULT RemoveDist(wchar_t *TargetName)
 bool CreateUser(wchar_t *TargetName,wchar_t *userName){
     DWORD exitcode;
     wchar_t * commandLine = L"/usr/bin/useradd -m -g wheel -s /bin/bash ";
-    commandLine += userName;
+    wcscat(commandLine,userName);
     HRESULT hr = WslLaunchInteractive(TargetName,commandLine, true, &exitCode);
     if ((FAILED(hr)) || (exitCode != 0)) {
         return false;
     }
     commandLine = L"passwd ";
-    commandLine += userName;
+    wcscat(commandLine,userName);
     hr = WslLaunchInteractive(TargetName,commandLine, true, &exitCode);
     if ((FAILED(hr)) || (exitCode != 0)) {
         commandLine=L"userdel ";
-        commandLine += userName;
+        wcscat(commandLine,userName);
         WslLaunchInteractive(TargetName,commandLine, true, &exitCode);
         return false;
     }
