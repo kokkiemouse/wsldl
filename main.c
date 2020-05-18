@@ -30,7 +30,7 @@ HRESULT RemoveDist(wchar_t *TargetName);
 int ResettingDir(wchar_t *uuid,wchar_t *dirPath);
 void show_usage();
 void show_version();
-
+bool CreateUser(std::wstring_view userName);
 int main()
 {
     HRESULT hr = E_FAIL;
@@ -488,8 +488,46 @@ int QueryWslPath(wchar_t *TargetName, wchar_t *path, wchar_t *out)
     MultiByteToWideChar(CP_UTF8, 0, buf, -1, out, SHRT_MAX);
     return 0;
 }
+std::wstring GetUserInput(unsigned long maxCharacters){
+    size_t buffsize=maxCharacters + 1;
+    std::unique_ptr<wchar_t[]> inputBuffer(new wchar_t[bufferSize]);
+        std::wstring input;
+    if (wscanf_s(L"%s", inputBuffer.get(), (unsigned int)bufferSize) == 1) {
+        input = inputBuffer.get();
+    }
+        wchar_t wch;
+    do {
+        wch = getwchar();
 
-int InstallDist(wchar_t *TargetName,wchar_t *tgzname)
+    } while ((wch != L'\n') && (wch != WEOF));
+
+    return input;
+}
+HRESULT SetDefaultUser(wchar_t *TargetName,wchar_t *userName)
+{
+    unsigned long uidkun=QueryUser(TargetName,userName);
+    HRESULT hr=WslConfigureDistribution(TargetName,uidkun,WSL_DISTRIBUTION_FLAGS_DEFAULT);
+}
+int Pacman_initializing(wchar_t *TargetName){
+    DWORD exitcode;
+    std::wstring commandLine = L"/usr/bin/pacman-key --init";
+    HRESULT hr = WslLaunchInteractive(TargetName,commandLine.c_str(), true, &exitCode);
+    if ((FAILED(hr)) || (exitCode != 0)) {
+        return false;
+    }
+    commandLine=L"/usr/bin/pacman-key --populate archlinux";
+    hr = WslLaunchInteractive(TargetName,commandLine.c_str(), true, &exitCode);
+    if ((FAILED(hr)) || (exitCode != 0)) {
+        return false;
+    }
+    commandLine=L"/usr/bin/pacman-key --populate alterlinux";
+    hr = WslLaunchInteractive(TargetName,commandLine.c_str(), true, &exitCode);
+    if ((FAILED(hr)) || (exitCode != 0)) {
+        return false;
+    }
+    return true;
+}
+int InstallDist(wchar_t *TargetName,wchar_t *tgzname,bool create_user)
 {
     wprintf(L"Installing...\n");
     HRESULT hr = WslRegisterDistribution(TargetName,tgzname);
@@ -499,6 +537,25 @@ int InstallDist(wchar_t *TargetName,wchar_t *tgzname)
         wprintf(L"Press any key to continue...");
         getchar();
         return hr;
+    }
+    bool pacres=Pacman_initializing();
+    if(!pacres){
+        fwprintf(stderr,L"ERROR:Installation Failed!\nPacman Initializing Failed");
+        wprintf(L"Press any key to continue...");
+        getchar();
+        return 11;
+    }
+    if(create_user){
+        wprintf(L("Enter new UNIX username: %0"))
+        std::wstring userName;
+        do{
+            userName = GetUserInput(32);
+        }while (!CreateUser(TargetName,userName));
+        wchar_t* wchar_uname=userName.c_str();
+        hr = SetDefaultUser(wchar_uname);
+        if (FAILED(hr)) {
+            return hr;
+        }
     }
     wprintf(L"Installation Complete!\n");
     wprintf(L"Press any key to continue...");
@@ -524,6 +581,26 @@ HRESULT RemoveDist(wchar_t *TargetName)
         fwprintf(stderr,L"Accepting is required to proceed.\n\n");
         return S_OK;
     }
+}
+bool CreateUser(wchar_t *TargetName,std::wstring_view userName){
+    DWORD exitcode;
+    std::wstring commandLine = L"/usr/bin/useradd -m -g wheel -s /bin/bash ";
+    commandLine += userName;
+    HRESULT hr = WslLaunchInteractive(TargetName,commandLine.c_str(), true, &exitCode);
+    if ((FAILED(hr)) || (exitCode != 0)) {
+        return false;
+    }
+    commandLine = L"passwd ";
+    commandLine += userName;
+    hr = WslLaunchInteractive(TargetName,commandLine.c_str(), true, &exitCode);
+    if ((FAILED(hr)) || (exitCode != 0)) {
+        commandLine=L"userdel ";
+        commandLine += userName;
+        WslLaunchInteractive(TargetName,commandLine.c_str(), true, &exitCode);
+        return false;
+    }
+
+    return true;
 }
 
 int ResettingDir(wchar_t *uuid,wchar_t *dirPath)
