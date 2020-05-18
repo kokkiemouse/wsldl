@@ -571,7 +571,7 @@ HRESULT RemoveDist(wchar_t *TargetName)
     }
 }
 bool CreateUser(wchar_t *TargetName,wchar_t *userName){
-    DWORD exitcode=0;
+    DWORD exitCode=0;
     wchar_t * commandLine = L"/usr/bin/useradd -m -g wheel -s /bin/bash ";
     wcscat(commandLine,userName);
     HRESULT hr = WslLaunchInteractive(TargetName,commandLine, true, &exitCode);
