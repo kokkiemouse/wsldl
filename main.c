@@ -573,17 +573,15 @@ HRESULT RemoveDist(wchar_t *TargetName)
 bool CreateUser(wchar_t *TargetName,wchar_t *userName){
     DWORD exitCode=0;
     wchar_t * commandLine = L"/usr/bin/useradd -m -g wheel -s /bin/bash ";
-    wcscat(commandLine,userName);
+    swprintf(commandLine,256,L"/usr/bin/useradd -m -g wheel -s /bin/bash %s",userName);
     HRESULT hr = WslLaunchInteractive(TargetName,commandLine, true, &exitCode);
     if ((FAILED(hr)) || (exitCode != 0)) {
         return false;
     }
-    commandLine = L"passwd ";
-    wcscat(commandLine,userName);
+    swprintf(commandLine,256,L"/usr/bin/passwd %s",userName);
     hr = WslLaunchInteractive(TargetName,commandLine, true, &exitCode);
     if ((FAILED(hr)) || (exitCode != 0)) {
-        commandLine=L"userdel ";
-        wcscat(commandLine,userName);
+        swprintf(commandLine,256,L"/usr/bib/userdel %s",userName);
         WslLaunchInteractive(TargetName,commandLine, true, &exitCode);
         return false;
     }
