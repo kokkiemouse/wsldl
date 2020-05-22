@@ -513,6 +513,13 @@ int Pacman_initializing(wchar_t *TargetName){
     if ((FAILED(hr)) || (exitCode != 0)) {
         return false;
     }
+    wprintf(L"System Upgrading...\n");
+    commandLine=L"/usr/sbin/pacman --noconfirm -Syu";
+    hr = WslLaunchInteractive(TargetName,commandLine, true, &exitCode);
+    if ((FAILED(hr)) || (exitCode != 0)) {
+        return false;
+    }
+    wprintf(L"Base-Devel Installing...\n");
     commandLine=L"/usr/sbin/pacman --needed --noconfirm -S base-devel";
     hr = WslLaunchInteractive(TargetName,commandLine, true, &exitCode);
     if ((FAILED(hr)) || (exitCode != 0)) {
