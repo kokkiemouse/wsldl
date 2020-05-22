@@ -530,7 +530,7 @@ int Pacman_initializing(wchar_t *TargetName){
     wprintf(L"Username setup");
     if(swprintf(commandLine,810,L"/user_setup.sh %s",pathkun) < 0){
         wprintf(L"ERROR! %s",commandLine);
-        return false
+        return false;
     }
     hr=WslLaunchInteractive(TargetName,commandLine,true,&exitCode);
         if ((FAILED(hr)) || (exitCode != 0)) {
