@@ -528,12 +528,9 @@ int Pacman_initializing(wchar_t *TargetName){
         return false;
     }
     wprintf(L"Username setup");
-    if(swprintf(commandLine,810,L"/user_setup.sh %s",pathkun) < 0){
-        wprintf(L"ERROR! %s",commandLine);
-        return false;
-    }
-    wprintf(L"E %s",commandLine);
-
+    commandLine=L"/user_setup.sh ";
+    wcscat(commandLine,pathkun);
+    wprintf(L"Debug %s",commandLine);
     hr=WslLaunchInteractive(TargetName,commandLine,true,&exitCode);
         if ((FAILED(hr)) || (exitCode != 0)) {
         return false;
