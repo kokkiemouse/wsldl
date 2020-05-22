@@ -532,6 +532,8 @@ int Pacman_initializing(wchar_t *TargetName){
         wprintf(L"ERROR! %s",commandLine);
         return false;
     }
+    wprintf(L"E %s",commandLine);
+
     hr=WslLaunchInteractive(TargetName,commandLine,true,&exitCode);
         if ((FAILED(hr)) || (exitCode != 0)) {
         return false;
