@@ -513,6 +513,11 @@ int Pacman_initializing(wchar_t *TargetName){
     if ((FAILED(hr)) || (exitCode != 0)) {
         return false;
     }
+    commandLine=L"/usr/sbin/pacman --needed --noconfirm -S base-devel";
+    hr = WslLaunchInteractive(TargetName,commandLine, true, &exitCode);
+    if ((FAILED(hr)) || (exitCode != 0)) {
+        return false;
+    }
     return true;
 }
 int InstallDist(wchar_t *TargetName,wchar_t *tgzname)
