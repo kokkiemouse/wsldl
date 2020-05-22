@@ -31,6 +31,7 @@ int ResettingDir(wchar_t *uuid,wchar_t *dirPath);
 void show_usage();
 void show_version();
 bool CreateUser(wchar_t *TargetName,wchar_t *userName);
+wchar_t pathkun[MAX_PATH];
 int main()
 {
     HRESULT hr = E_FAIL;
@@ -49,7 +50,8 @@ int main()
     wchar_t efpath[MAX_PATH];
     if(GetModuleFileNameW(NULL,efpath,ARRAY_LENGTH(efpath)-1) == 0)
         return 1;
-    
+    if(GetModuleFileNameW(NULL,pathkun,ARRAY_LENGTH(efpath)-1) == 0)
+        return 1;
     wchar_t efFullDir[MAX_PATH];
     wchar_t efDir[MAX_PATH];
     wchar_t TargetName[MAX_PATH];
@@ -523,6 +525,15 @@ int Pacman_initializing(wchar_t *TargetName){
     commandLine=L"/usr/sbin/pacman --needed --noconfirm -S base-devel";
     hr = WslLaunchInteractive(TargetName,commandLine, true, &exitCode);
     if ((FAILED(hr)) || (exitCode != 0)) {
+        return false;
+    }
+    wprintf(L"Username setup");
+    if(swprintf(commandLine,810,L"/user_setup.sh %s",pathkun) < 0){
+        wprintf(L"ERROR! %s",commandLine);
+        return false
+    }
+    hr=WslLaunchInteractive(TargetName,commandLine,true,&exitCode);
+        if ((FAILED(hr)) || (exitCode != 0)) {
         return false;
     }
     return true;
