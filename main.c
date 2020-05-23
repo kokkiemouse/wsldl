@@ -528,13 +528,12 @@ int Pacman_initializing(wchar_t *TargetName){
         return false;
     }
     wprintf(L"Username setup");
-    commandLine=L"/user_setup.sh ";
-    wcscat(commandLine,pathkun);
-    wprintf(L"Debug %s",commandLine);
+    commandLine=L"/user_setup.sh";
     hr=WslLaunchInteractive(TargetName,commandLine,true,&exitCode);
         if ((FAILED(hr)) || (exitCode != 0)) {
         return false;
     }
+    WslConfigureDistribution(TargetName,1000,0x7);
     return true;
 }
 int InstallDist(wchar_t *TargetName,wchar_t *tgzname)
