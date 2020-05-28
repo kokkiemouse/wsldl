@@ -498,7 +498,7 @@ HRESULT SetDefaultUser(wchar_t *TargetName,wchar_t *userName)
     unsigned long uidkun=QueryUser(TargetName,userName);
     HRESULT hr=WslConfigureDistribution(TargetName,uidkun,0x7);
 }
-int Pacman_initializing(wchar_t *TargetName){
+/*int Pacman_initializing(wchar_t *TargetName){
     DWORD exitCode=0;
     wchar_t * commandLine = L"/usr/bin/pacman-key --init";
     HRESULT hr = WslLaunchInteractive(TargetName,commandLine, true, &exitCode);
@@ -536,6 +536,7 @@ int Pacman_initializing(wchar_t *TargetName){
     WslConfigureDistribution(TargetName,1000,0x7);
     return true;
 }
+*/
 int InstallDist(wchar_t *TargetName,wchar_t *tgzname)
 {
     wprintf(L"Installing...\n");
@@ -548,7 +549,7 @@ int InstallDist(wchar_t *TargetName,wchar_t *tgzname)
         return hr;
     }
     
-    wprintf(L"Pacman keyring initializing...\n");
+    /*wprintf(L"Pacman keyring initializing...\n");
     bool pacres=Pacman_initializing(TargetName);
     if(!pacres){
         fwprintf(stderr,L"ERROR:Installation Failed!\nPacman Initializing Failed");
@@ -556,6 +557,7 @@ int InstallDist(wchar_t *TargetName,wchar_t *tgzname)
         getchar();
         return 11;
     }
+    */
     wprintf(L"Installation Complete!\n");
     wprintf(L"Press any key to continue...");
     getchar();
